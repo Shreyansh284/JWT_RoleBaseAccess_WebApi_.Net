@@ -9,7 +9,7 @@ namespace Infrastructure.Repositories
     {
         public async Task<User> GetUserByIdAsync(Guid id)
         {
-            return await dbContext.Users.FindAsync(id);
+            return await dbContext.Users.SingleAsync(u => u.Id == id);
         }
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {

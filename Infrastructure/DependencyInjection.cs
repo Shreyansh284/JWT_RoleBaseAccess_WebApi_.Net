@@ -1,4 +1,5 @@
-﻿using Core.Interfaces;
+﻿using Application.Interfaces;
+using Core.Interfaces;
 using Core.Options;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
@@ -15,6 +16,7 @@ public static class DependencyInjection
         services.AddDbContext<AppDbContext>((provider,options) =>
             options.UseSqlServer(provider.GetRequiredService<IOptionsSnapshot<ConnectionString>>().Value.DefaultConnection));
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IAuthRepository, AuthRepository>();
         return services;
     }
 }

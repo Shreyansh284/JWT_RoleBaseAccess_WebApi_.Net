@@ -2,6 +2,7 @@
 using Application.Queries.UserQueries;
 using Core.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
@@ -17,6 +18,7 @@ public class UserController(ISender sender) : ControllerBase
 
         return Ok(addUser);
     }
+    [Authorize]
     [HttpGet("users")]
     public async Task<IActionResult> GetAllUsers()
     {
@@ -25,6 +27,7 @@ public class UserController(ISender sender) : ControllerBase
         return Ok(users);
     }
 
+    [Authorize]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetUserById(Guid id)
     {
