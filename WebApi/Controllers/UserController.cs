@@ -11,6 +11,7 @@ namespace WebApi.Controllers;
     [ApiController]
 public class UserController(ISender sender) : ControllerBase
 {
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> AddUser ([FromBody]User user)
     {
@@ -18,7 +19,7 @@ public class UserController(ISender sender) : ControllerBase
 
         return Ok(addUser);
     }
-    [Authorize]
+    [Authorize(Roles = "Admin,User")]
     [HttpGet("users")]
     public async Task<IActionResult> GetAllUsers()
     {
@@ -27,7 +28,7 @@ public class UserController(ISender sender) : ControllerBase
         return Ok(users);
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin,User")]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetUserById(Guid id)
     {
@@ -38,7 +39,7 @@ public class UserController(ISender sender) : ControllerBase
         }
         return Ok(user);
     }
-
+    [Authorize(Roles = "Admin,User")]
     [HttpPatch("{id}")]
     public async Task<IActionResult> UpdateUser(Guid id, [FromBody] User user)
     {
@@ -50,7 +51,7 @@ public class UserController(ISender sender) : ControllerBase
         }
         return Ok(userToUpdate);
     }
-
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUser(Guid id)
     {
