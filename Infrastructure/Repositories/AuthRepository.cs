@@ -50,7 +50,8 @@ public class AuthRepository(AppDbContext appDbContext,IConfiguration configurati
     {
         var claims=new List<Claim>
         {
-            new Claim(ClaimTypes.Name,user.Name)
+            new Claim(ClaimTypes.Name,user.Name),
+            new Claim(ClaimTypes.Role,user.Role.ToString())
         };
         var key = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(configuration.GetValue<string>("AppSettings:Token")!));
