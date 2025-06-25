@@ -66,4 +66,10 @@ public class AuthRepository(AppDbContext appDbContext,IConfiguration configurati
 
         return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
     }
+    public async Task<User?> GetUserByUsernameOrEmailAsync(string input)
+    {
+        return await appDbContext.Users
+            .FirstOrDefaultAsync(u => u.Email == input || u.Name == input);
+    }
+
 }
