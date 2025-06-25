@@ -7,4 +7,6 @@ public interface IAuthRepository
 {
     Task<User> RegisterUserAsync(User user);
     Task<string> LoginUserAsync(UserLoginDTO  userLoginDTO);
+    Task<User?> GetUserByUsernameOrEmailAsync(string input);
+
 }
